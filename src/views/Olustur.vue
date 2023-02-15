@@ -1,5 +1,14 @@
+<script setup>
+import { useStudentStore } from '@/stores/student';
+const studentStore = useStudentStore();
+
+  function onSave(){
+    studentStore.addStudent({id:new Date().getTime(), ad: ad.value, soyad: soyad.value, tel: tel.value, numara: numara.value, sinif: sinif.value, ogr: ogr.value});
+  }
+</script>
+
 <template>
-  <div class="w-full h-full flex flex-col items-center justify center gap-2">
+  <div class="w-full h-full flex flex-col items-center justify-center gap-2">
     <h1 class="text-2xl">Öğrenci Kayıt</h1>
     <form @submit.prevent="onSave()" class="w-3/5 md:w-2/3 lg:w-1/3 rounded-md p-3 border shadow-lg">
       <div class="mb-6">
@@ -60,12 +69,4 @@
 </div>
 </template>
 
-<script setup>
-import { useStudentStore } from '@/stores/student';
-const studentStore = useStudentStore();
 
-  function onSave(){
-    studentStore.addStudent({ ad: ad.value, soyad: soyad.value, tel: tel.value, numara: numara.value, sinif: sinif.value, ogr: ogr.value});
-  }
-
-</script>
