@@ -1,7 +1,7 @@
 <script setup>
-// import { useStudentStore } from './stores/student';
+import { useStudentStore } from './stores/student';
 
-// const studentStore = useStudentStore();
+const studentStore = useStudentStore();
 
 // studentStore.addStudent({ id: 0, name: 'ecem'});
 // studentStore.addStudent({ id: 1, name: 'memed'});
@@ -11,7 +11,7 @@
 // console.log(JSON.stringify(studentStore.students, null, 2));
 // console.log(JSON.stringify(studentStore.filteredStudents, null, 2));
 
-// studentStore.deleteStudent(1);
+studentStore.getStudents();
 </script>
 
 <template>
