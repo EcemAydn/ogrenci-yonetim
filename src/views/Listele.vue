@@ -9,7 +9,6 @@ const search = ref('');
 function deleteButton(e) {
   studentStore.deleteStudent(e);
 }
-searchStudents();
 
 function searchStudents() {
   clearTimeout(timeout);
@@ -64,7 +63,7 @@ function searchStudents() {
 
             <tbody class="">
               <tr
-                v-for="student in studentStore.filteredStudent" 
+                v-for="student in studentStore.searchStudents(search)" 
                 :key="student.id"
                 class="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100 even:bg-gray-50 last:border-b-0"
               >
