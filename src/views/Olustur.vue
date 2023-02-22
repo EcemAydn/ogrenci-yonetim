@@ -1,11 +1,17 @@
 <script setup>
 import { useStudentStore } from '@/stores/student';
+import { useRoute, useRouter } from 'vue-router';
+
 const studentStore = useStudentStore();
+const router = useRouter();
+
 
 // Oluşturunca bişi yap anlim
 
   function onSave() {
-    studentStore.addStudent({ id: crypto.randomUUID(), ad: ad.value, soyad: soyad.value, tel: tel.value, numara: numara.value, sinif: sinif.value, ogr: ogr.value });
+    studentStore.addStudent({ id: new Date().getTime(), ad: ad.value, soyad: soyad.value, tel: tel.value, numara: numara.value, sinif: sinif.value, ogr: ogr.value });
+    alert("Kayıt başarılı");
+    router.push({ name: 'ListeSayfasi' });
   }
 </script>
 

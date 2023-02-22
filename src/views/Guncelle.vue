@@ -17,13 +17,15 @@ const student = ref({
 });
 
 if(route.params.id) {
-  student.value = studentStore.getStudentById(route.params.id);
+  student.value = studentStore.getStudentById(Number(route.params.id));
 } else {
-  router.push({ name: 'ListeSayfasi' })
+  router.push({ name: 'ListeSayfasi' });
 }
 
 function updateButton() {
   studentStore.updateStudent(student.value)
+  alert("Guncellendi")
+  router.push({ name: 'ListeSayfasi' });
 }
 
   // function updateButton(){
