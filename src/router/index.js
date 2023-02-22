@@ -15,8 +15,13 @@ const router = createRouter({
       component: () => import('../views/Olustur.vue')
     },
     {
-      path: '/guncelle',
+      path: '/guncelle/:id',
       name: 'GuncellemeSayfasi',
+      component: () => import('../views/Guncelle.vue')
+    },
+    {
+      path: '/guncelle/',
+      name: 'ListeleYönlendirme',
       component: () => import('../views/Guncelle.vue')
     },
   ]
