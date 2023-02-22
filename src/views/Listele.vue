@@ -1,14 +1,22 @@
 <script setup>
-// import { ref } from 'vue';
+import { ref } from 'vue';
 import { useStudentStore } from '@/stores/student';
-  const studentStore = useStudentStore();
 
-// const list = ref([]);
-// console.log(JSON.stringify(studentStore.students, null, 2));
-  function deleteButton(e){
-    studentStore.deleteStudent(e)
-  }
+const studentStore = useStudentStore();
+let timeout = null;
+const search = ref('');
 
+function deleteButton(e) {
+  studentStore.deleteStudent(e);
+}
+searchStudents();
+
+function searchStudents() {
+  clearTimeout(timeout);
+  timeout = setTimeout(() => {
+    studentStore.searchStudents(search.value.toLowerCase())
+  }, 500)
+}
 </script>
 
 <template>
@@ -16,7 +24,7 @@ import { useStudentStore } from '@/stores/student';
     <h1 lang="tr-TR" class="text-2xl">Öğrenci Listesi</h1>
     <div class="border p-4 rounded-md m-8 w-full overflow-hidden h-full shadow-lg">
       <div class="flex justify-between">
-        <input type="search" class="w-1/2 border rounded-md outline-none p-1">
+        <input type="search" @keyup="searchStudents" v-model="search" class="w-1/2 border rounded-md outline-none p-1" />
         <router-link class="bg-green-500 p-1 pl-4 pr-4 rounded-md text-white shadow-inner hover:shadow-none hover:bg-green-600 hover:transition hover:duration-500" :to="{ name: 'OlusturSayfasi' }">
           + Yeni kayıt oluştur
         </router-link>
@@ -56,7 +64,7 @@ import { useStudentStore } from '@/stores/student';
 
             <tbody class="">
               <tr
-                v-for="student in studentStore.students" 
+                v-for="student in studentStore.filteredStudent" 
                 :key="student.id"
                 class="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100 even:bg-gray-50 last:border-b-0"
               >

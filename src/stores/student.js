@@ -3,16 +3,34 @@ import { defineStore } from 'pinia';
 
 export const useStudentStore = defineStore('student', () => {
     const students = ref([]);
+    const filteredStudent = ref('');
 
     // function findStudent(id){
     //     const findStd = students.value.findIndex(s => s.id === id)
     //     console.log(findStd);
     // }
 
-    // const filteredStudents =  computed(() => {
-    //     return students.value.filter((std) => std.id === id);
+    // const searchStudents =  computed(() => (search) => {
+    //     return students.value.filter((std) => std.ad.toLowerCase().includes(search)
+    //         || std.soyad.toLowerCase().includes(search)
+    //         || std.tel.toLowerCase().includes(search)
+    //         || std.numara.toLowerCase().includes(search)
+    //         || std.ogr.toLowerCase().includes(search));
     // });
 
+    function searchStudents(search){
+        filteredStudent.value = students.value.filter((std) => {
+            return std.ad.toLowerCase().includes(search)
+                || std.soyad.toLowerCase().includes(search)
+                || std.tel.toString().toLowerCase().includes(search)
+                || std.numara.toString().toLowerCase().includes(search)
+                || std.sinif.toLowerCase().includes(search)
+                || std.ogr.toLowerCase().includes(search);
+        });
+    }
+
+
+    
     function getStudents() {
         if(localStorage.getItem('students')){
             students.value = JSON.parse(localStorage.getItem('students'));
@@ -40,5 +58,5 @@ export const useStudentStore = defineStore('student', () => {
         localStorage.setItem('students', JSON.stringify(students.value));
      }
 
-    return { students, getStudents, getStudentById, addStudent, deleteStudent, updateStudent}
+    return { students, filteredStudent, getStudents, getStudentById, addStudent, deleteStudent, updateStudent, searchStudents}
 });
