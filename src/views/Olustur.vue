@@ -2,8 +2,10 @@
 import { useStudentStore } from '@/stores/student';
 const studentStore = useStudentStore();
 
-  function onSave(){
-    studentStore.addStudent({id:new Date().getTime(), ad: ad.value, soyad: soyad.value, tel: tel.value, numara: numara.value, sinif: sinif.value, ogr: ogr.value});
+// Oluşturunca bişi yap anlim
+
+  function onSave() {
+    studentStore.addStudent({ id: crypto.randomUUID(), ad: ad.value, soyad: soyad.value, tel: tel.value, numara: numara.value, sinif: sinif.value, ogr: ogr.value });
   }
 </script>
 
